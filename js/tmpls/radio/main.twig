@@ -1,0 +1,9 @@
+{% for option in options %}
+    <label>
+        {{ option.label }}
+        <input class="form-control"
+               type="radio"
+               value="{{ option.value }}"
+               name="{{ name }}">
+    </label>
+{% endfor %}
