@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label v-if="label">{{ label }}</label>
+        <label v-if="dataName">{{ dataName }}</label>
         <input @input="calcTotal($event.target.value)" v-model="val">
         {{ val }}
     </div>
@@ -11,11 +11,12 @@
         name: 'currency-input',
         props: {
             value: {type: Number},
-            label: {type: String, default: ''}
+            name: {type: String, default: ''}
         },
         data() {
             return {
-                val: this.value
+                val: this.value,
+                dataName: this.name
             }
         },
         methods: {

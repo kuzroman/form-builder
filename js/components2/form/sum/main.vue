@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-for="item in dataItems">
-            <currency-input v-model="item.value" ></currency-input>
+            <currency-input v-model="item.value" :name="item.name" ></currency-input>
         </template>
         <p>Total: ${{ total }}</p>
     </div>
