@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "webpack": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch"
   },
   "author": "",
@@ -21,11 +21,14 @@
     "style-loader": "^0.18.2",
     "twig-loader": "^0.3.1",
     "url-loader": "^0.5.9",
+    "vue-loader": "^14.1.1",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0"
   },
   "dependencies": {
     "jquery": "^2.2",
     "twig": "^1.10.5",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "vuejs-datepicker": "^0.9.25"
   }
 }
