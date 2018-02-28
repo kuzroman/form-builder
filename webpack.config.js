@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
-let input = 'main2';
-let components = 'components2';
+let input = 'main';
+let components = 'components';
 
 
 let PROD = 0;//JSON.parse(process.env.PROD_ENV || '0');

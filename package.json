@@ -29,6 +29,8 @@
     "jquery": "^2.2",
     "twig": "^1.10.5",
     "underscore": "^1.8.3",
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
     "vuejs-datepicker": "^0.9.25"
   }
 }

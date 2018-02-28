@@ -1,42 +1,37 @@
 <template>
     <div>
-        <template v-for="item in items">
-            <currency-input v-model="item.value" ></currency-input>
+        Сумма
+        <template v-for="item in dataItems">
+            <currency-input v-model="item.value" :name="item.name" ></currency-input>
         </template>
         <p>Total: ${{ total }}</p>
     </div>
 </template>
 
 <script>
-    import currencyInput from "./currency-input.vue";
-    import {data} from 'Data/json-fake';
-
-    console.log('this', this);
-
     export default {
         name: 'sum',
-        // props: {
-        //     items: {type: Array}
-        // },
-        data: function() {
+        props: {
+            items: {type: Array}
+        },
+        data: function () {
             return {
-                items: data.items,
+                dataItems: this.items,
             }
         },
         components: {
-            currencyInput,
+            currencyInput: require('Components/form/sum/currency-input.vue').default,
         },
         computed: {
-            total () {
+            total() {
                 console.log('parent computed total');
                 let total = 0;
-                for (let i in this.items) {
-                    total += +this.items[i].value;
+                for (let i in this.dataItems) {
+                    total += +this.dataItems[i].value;
                 }
                 return total;
             }
         }
-
     }
 </script>
 

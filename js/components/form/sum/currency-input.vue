@@ -1,7 +1,8 @@
 <template>
     <div>
-        <label v-if="label">{{ label }}</label>
-        <input :value="value" @input="calcTotal($event.target.value)">{{ value }}
+        <label v-if="dataName">{{ dataName }}</label>
+        <input @input="calcTotal($event.target.value)" v-model="val">
+        {{ val }}
     </div>
 </template>
 
@@ -10,7 +11,13 @@
         name: 'currency-input',
         props: {
             value: {type: Number},
-            label: {type: String, default: ''}
+            name: {type: String, default: ''}
+        },
+        data() {
+            return {
+                val: this.value,
+                dataName: this.name
+            }
         },
         methods: {
             calcTotal(value) {
