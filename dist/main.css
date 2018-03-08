@@ -1,0 +1,13 @@
+.g-left {
+  float: left; }
+
+.g-right {
+  float: right; }
+
+.l-content {
+  max-width: 400px;
+  margin: 0 auto; }
+  .l-content__el {
+    margin: 20px 0; }
+
+/*# sourceMappingURL=main.css.map*/

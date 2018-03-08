@@ -2,15 +2,16 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
-let input = 'main';
 let components = 'components';
-
 
 let PROD = 0;//JSON.parse(process.env.PROD_ENV || '0');
 
 let pathTo = {
     dist: path.resolve(__dirname, 'dist'),
-    js: path.resolve(__dirname, 'js/' + input + '.js'),
+    js: path.resolve(__dirname, 'js/main.js'),
+    // js: path.resolve(__dirname, 'js/main-2.js'),
+    // js: path.resolve(__dirname, 'js/vuex.js'),
+    css: path.resolve(__dirname, 'styles/main.sass'),
 };
 
 console.log(path.join(__dirname, 'js'));
@@ -20,9 +21,13 @@ module.exports = {
 
     devtool: 'source-map',
 
-    entry: pathTo.js,
+    entry: {
+        js: pathTo.js,
+        css: pathTo.css,
+    },
     output: {
-        filename: PROD ? 'main.min.js' : 'main.js',
+        // filename: PROD ? 'main.min.js' : 'main.js',
+        filename: 'main.[name]',
         path: pathTo.dist
     },
 
@@ -39,7 +44,8 @@ module.exports = {
         modules: ['node_modules'],
         alias: {
             Components: path.resolve(__dirname, 'js/'+components+'/'),
-            Data: path.resolve(__dirname, 'js/data/')
+            Data: path.resolve(__dirname, 'js/data/'),
+            Js: path.resolve(__dirname, 'js/')
         }
     },
 
@@ -58,7 +64,7 @@ module.exports = {
             },
 
             { // Extract css
-                test: /\.scss$/,
+                test: /\.sass$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader!sass-loader',

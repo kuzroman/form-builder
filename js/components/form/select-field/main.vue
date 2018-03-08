@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="l-content__el">
         <label>{{ label }}
             <select :name="id" v-model="selectedInner" class="form-control">
                 <option v-for="option in options" :value="option.value">
@@ -7,7 +7,7 @@
                 </option>
             </select>
         </label>
-        check bind: {{ selectedInner  }}
+        <div>check bind: {{ selectedInner  }}</div>
     </div>
 </template>
 

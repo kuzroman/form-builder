@@ -1,7 +1,12 @@
 <template>
-    <div class="material-switch pull-right">
-        <input :id="id" :name="id" type="checkbox" :checked="initialState" />
+    <div class="material-switch pull-right l-content__el">
+        <div>{{ label }}</div>
+        <input :id="id" :name="id" type="checkbox"
+               :checked="isChecked"
+               @change="changeSwitch"
+        />
         <label :for="id" class="label-default"></label>
+        <p>{{ isChecked ? 'да' : 'нет' }}</p>
     </div>
 </template>
 
@@ -11,11 +16,21 @@
         props: {
             id: {type: String},
             label: {type: String},
-            initialState: {type: Boolean},
         },
-        data: function () {
-            return {
-                value: this.initialValue,
+        computed: {
+            isChecked () { // todo можно короче! модель теперь обьект
+                let model = this.$store.state.model;
+                for (let i in model) {
+                    if (model[i].id === this.id) {
+                        return model[i].props.isChecked;
+                    }
+                }
+            },
+        },
+        methods: {
+            changeSwitch(ev) {
+                this.$store.commit('setParam', {id: this.id, key: 'isChecked', val: ev.target.checked});
+//                console.log('change switch', ev.target.checked);
             }
         },
     }
@@ -59,11 +74,9 @@
         width: 24px;
     }
     .material-switch > input[type="checkbox"]:checked + label::before {
-        /*background: inherit;*/
         opacity: 0.5;
     }
     .material-switch > input[type="checkbox"]:checked + label::after {
-        /*background: inherit;*/
         left: 20px;
     }
 </style>

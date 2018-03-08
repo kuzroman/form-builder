@@ -1,13 +1,51 @@
-export let data = [
+export let jsonForms = [
+    // !Добавить группу, что она должна делать?
     {
-        id: 'name',
+        id: 'first-name',
         type: 'input-field',
         props: {
-            label: 'Person name',
-            placeholder: 'Enter a name',
-            icon: 'icon-people',
-            initialValue: 'John Doe',
-            errors: []
+            label: 'Имя',
+            placeholder: 'Имя',
+            initialValue: '',
+
+            validation: [
+                {
+                    type: 'regexp',
+                    expression: '^[а-яё-]+$',
+                    flags: 'i',
+                    message: 'Только кириллица и дефис'
+                }
+            ]
+        },
+    },
+    {
+        id: 'patronymic',
+        type: 'input-field',
+        props: {
+            label: 'Отчество',
+            placeholder: 'Отчество',
+            initialValue: 'Initial Name',
+
+            validation: [
+                {
+                    type: 'regexp',
+                    expression: '^[а-яё-]+$',
+                    flags: 'i',
+                    message: 'Только кириллица и дефис'
+                }
+            ],
+
+            depends: {
+                type: 'isVisible',
+                when: [
+                    {
+                        id: 'no-patronymic',
+                        props: {
+                            isChecked: false
+                        }
+                    }
+                ]
+            }
         },
         validation: [
             {
@@ -19,110 +57,98 @@ export let data = [
         ]
     },
     {
-        id: 'homeless',
+        id: 'no-patronymic',
         type: 'switch-field',
         props: {
-            label: 'I am homeless',
-            initialState: false,
+            label: 'Без батьки рос',
+            isChecked: false,
         }
     },
+
+
     {
-        id: 'address',
-        type: 'address-compound',
+        id: 'gender',
+        type: 'radio-field',
         props: {
-            addressTitle: 'Enter your address'
+            label: 'Пол',
+
+            items: [
+                {text: 'M', value: 0},
+                {text: 'Ж', value: 1}
+            ]
         },
+    },
+
+    {
+        id: 'birthdate',
+        type: 'date-field',
+        props: {
+            label: 'Дата рождения',
+            placeholder: 'до 2018-03-05, после 2018-03-25',
+            min: '2018-03-05',
+            max: '2018-03-25',
+        }
+    },
+
+    {
+        id: 'date',
+        type: 'date-field',
+        props: {
+            label: 'Предустановленная дата',
+            value: '2018-03-08'//new Date()
+        }
+    },
+
+    {
+        id: 'letter',
+        type: 'select-field',
+        props: {
+            label: 'Choose a letter',
+            selected: 'Б',
+            options: [
+                {text: 'Один', value: 'А'},
+                {text: 'Два', value: 'Б'},
+                {text: 'Три', value: 'В'}
+            ]
+        }
     },
     {
         id: 'email',
         type: 'input-field',
         props: {
-            label: 'Email',
+            label: 'Email with validation',
             placeholder: 'mail@example.com',
-            icon: 'icon-mail',
-            iconSide: 'right',
-            errors: []
-        },
-        validation: [
-            {
+            errors: [],
+
+            validation: [{
                 type: 'regexp',
                 expression: '^[a-z0-9\.]+@[a-z0-9\.]+$',
                 flags: 'i',
                 message: 'Invalid email'
-            }
-        ]
-    }
-];
+            }]
+        },
+    },
 
-// export let data = { // form definition object
-//     items: [ // list of field definitions
-//         {
-//             type: 'html', // static content type
-//             content: '<h2>Title</h2>' // innerText = '...'
-//         },
-//         {
-//             type: 'string', // input type="text"
-//             id: 'firstString',  // internal reference. NOT an id attribute.
-//             name: 'simpleInput',
-//             value: 'default value',
-//             validation: [ // list of validation definitions
-//                 {
-//                     type: 'length', // not all validators support all field types
-//                     min: 5,
-//                     max: 50,
-//                     message: 'The value must contain between {{ min }} and {{ max }} characters.'
-//                 }, // template - mustache?
-//                 {
-//                     type: 'regex',
-//                     value: '^[a-z]+$', // убрать кавычки -> ^[a-z]+$
-//                     message: 'Allowed characters: lowercase a-z'
-//                 }
-//             ]
-//         },
-//         {
-//             type: 'radio',
-//             id: 'radioswitch', // again, internal reference
-//             name: 'radios',
-//             options: [
-//                 {label: 'First option', value: '0'},
-//                 {label: 'Second option', value: '1'},
-//                 {label: 'Thind option', value: '2'}
-//             ],
-//             actions: [ // list of action definitions: dependencies, conditional events, etc
-//                 {
-//                     type: 'set', // action type: set value of a field
-//                     ref: 'firstString', // field reference (see id)
-//                     value: 'test value', // value to set
-//                     when: { // condition object.
-//                         // ref: null, // implicitly ref == this field when ref is not set or falsey
-//                         op: 'eq', // "equals". Other possible values: "lt", "gt", "ne", "ge", "le"
-//                         value: ['0', '1'] // one of these values
-//                     }
-//                 }
-//             ]
-//         },
-//         {
-//             type: 'group', // wrapper for a group of fields
-//             children: [ // nested list of fields
-//                 {
-//                     type: 'string',
-//                     name: 'groupedInput1'
-//                 },
-//                 {
-//                     type: 'string',
-//                     name: 'groupedInput2'
-//                 }
-//             ],
-//             actions: [
-//                 {
-//                     type: 'show', // The group is visible only when...
-//                     when: {
-//                         ref: 'radioswitch', // radio group, see id
-//                         op: 'eq', // equals
-//                         value: '2' // 2
-//                     }
-//                 }
-//             ]
-//         }
-//     ]
-// }
+
+    // {
+    //     id: 'address',
+    //     type: 'address-compound',
+    //     props: {
+    //         addressTitle: 'Enter your address'
+    //     },
+    // },
+
+    // {
+    //     id: 'calculate',
+    //     type: 'sum',
+    //     props: {
+    //         label: 'calculate',
+    //         items: [
+    //             {type: 'input', name: 'price', value: 1},
+    //             {type: 'input', name: 'shipping', value: 2},
+    //             {type: 'input', name: 'handling', value: 3},
+    //             {type: 'input', name: 'discount', value: 0}
+    //         ],
+    //     }
+    // },
+];
