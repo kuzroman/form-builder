@@ -24,7 +24,7 @@ const store = new Vuex.Store({
 
 
 new Vue({
-    el: '#app',
+    el: '#form-builder',
     store,
     render: function (createElement) {
         let self = this;
@@ -41,6 +41,7 @@ new Vue({
         'radio-field': require('Components/form/radio-field/main.vue').default,
         'select-field': require('Components/form/select-field/main.vue').default,
         'date-field': require('Components/form/date-field/main.vue').default,
+        'phone-field': require('Components/form/phone-field/main.vue').default,
     },
     methods: {
         createElementBuilder(createElement) {

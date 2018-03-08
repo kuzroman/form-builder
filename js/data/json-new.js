@@ -97,7 +97,7 @@ module.exports = {
                 },
                 {
                     id: 'phone',
-                    type: 'phone-input',
+                    type: 'phone-field',
                     props: {
                         label: 'Номер мобильного телефона'
                     }

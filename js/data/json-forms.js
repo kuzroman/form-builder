@@ -89,13 +89,21 @@ export let jsonForms = [
             max: '2018-03-25',
         }
     },
-
     {
         id: 'date',
         type: 'date-field',
         props: {
             label: 'Предустановленная дата',
             value: '2018-03-08'//new Date()
+        }
+    },
+    {
+        id: 'phone',
+        type: 'phone-field',
+        props: {
+            label: 'Номер мобильного с маской',
+            placeholder: 'No time to explain just give me phone',
+            // phone: '9263249060'
         }
     },
 
