@@ -3,6 +3,7 @@
         {{ label }}
         <datepicker
                 input-class="form-control"
+                :name="id"
                 :placeholder="placeholder"
                 :disabled="state.disabled"
                 v-model="dataValue">
@@ -18,6 +19,7 @@
             'Datepicker': require('vuejs-datepicker')
         },
         props: {
+            id: String,
             value: String,
             label: String,
             placeholder: String,

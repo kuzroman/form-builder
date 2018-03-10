@@ -1,8 +1,7 @@
 <template>
     <div>
-        Билдер
+        Шаг {{ step }}
         <div id="form-builder"></div>
-        <p>Model: {{ dataSchema }}</p>
     </div>
 </template>
 
@@ -11,23 +10,42 @@
 //        el: '#form-builder',
         name: 'form-builder',
         props: {
-            schema: Object
+            model: Object
         },
         data: function () {
             return {
-                dataSchema: this.schema,
+                model: this.model,
             }
         },
-//        render: function (createElement) {
-//            let list = createElementBuilder(createElement, this.dataSchema);
-//            return createElement('div', {}, list);
-//        },
+        render: function (createElement) {
+            let self = this;
+            let list = this.createElementBuilder(createElement);
+            return createElement('div', {}, list);
+        },
         components: {
-            'sum': require('Components/form/sum/main.vue').default,
             'input-field': require('Components/form/input-field/main.vue').default,
             'switch-field': require('Components/form/switch-field/main.vue').default,
+            'radio-field': require('Components/form/radio-field/main.vue').default,
             'select-field': require('Components/form/select-field/main.vue').default,
             'date-field': require('Components/form/date-field/main.vue').default,
+            'phone-field': require('Components/form/phone-field/main.vue').default,
+        },
+        methods: {
+            createElementBuilder(createElement) {
+                let list = [];
+                let model = this.model;
+
+                for (let key in model) {
+                    let props = model[key].props;
+                    props.id = model[key].id;
+                    list.push(
+                        createElement(model[key].type, {
+                            props: props,
+                        })
+                    );
+                }
+                return list;
+            }
         }
     }
 

@@ -1,37 +1,34 @@
 <template>
     <div class="l-content__el">
         <div>{{ label }}</div>
-        <masked-input class="form-control" :placeholder="placeholder"
-            v-model="dataPhone"
-            mask="\+\7(111)111-11-11" />
+        <masked-input
+            class="form-control"
+            :name="id"
+            :placeholder="placeholder"
+            v-model="phone"
+            :mask="mask" >
+        </masked-input>
     </div>
 </template>
 
 <script>
-    import MaskedInput from 'vue-masked-input';
     export default {
         name: 'phone-field',
         components: {
-            MaskedInput // todo npm --save!
+            'MaskedInput': require('vue-masked-input').default
         },
         props: {
             id: String,
             label: String,
             placeholder: String,
-            phone: String,
+            initialValue: String,
+            mask: String, // '\\+\\7(111)111-11-11'
         },
         data: function () {
             return {
-                dataPhone: this.phone
+                phone: this.initialValue,
             }
         },
-//        mounted () {
-//        },
-        methods: {
-//            disableTo() {
-//                return new Date(2018, 2, 5);
-//            }
-        }
     }
 </script>
 

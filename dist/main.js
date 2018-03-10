@@ -920,6 +920,7 @@ module.exports = g;
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: 'date-field',
@@ -927,6 +928,7 @@ module.exports = g;
         'Datepicker': __webpack_require__(38)
     },
     props: {
+        id: String,
         value: String,
         label: String,
         placeholder: String,
@@ -954,7 +956,6 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_masked_input__ = __webpack_require__(43);
 //
 //
 //
@@ -964,30 +965,27 @@ module.exports = g;
 //
 //
 //
-
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     name: 'phone-field',
     components: {
-        MaskedInput: __WEBPACK_IMPORTED_MODULE_0_vue_masked_input__["a" /* default */] // todo npm --save!
+        'MaskedInput': __webpack_require__(43).default
     },
     props: {
         id: String,
         label: String,
         placeholder: String,
-        phone: String
+        initialValue: String,
+        mask: String // '\\+\\7(111)111-11-11'
     },
     data: function () {
         return {
-            dataPhone: this.phone
+            phone: this.initialValue
         };
-    },
-    //        mounted () {
-    //        },
-    methods: {
-        //            disableTo() {
-        //                return new Date(2018, 2, 5);
-        //            }
     }
 });
 
@@ -10321,15 +10319,16 @@ var jsonForms = exports.jsonForms = [
     type: 'date-field',
     props: {
         label: 'Предустановленная дата',
-        value: '2018-03-08' //new Date()
+        value: '2018-03-08'
     }
 }, {
     id: 'phone',
     type: 'phone-field',
     props: {
         label: 'Номер мобильного с маской',
-        placeholder: 'No time to explain just give me phone'
-        // phone: '9263249060'
+        placeholder: 'No time to explain just give me phone',
+        mask: '\\+\\7(111)111-11-11'
+        // initialValue: '9263249060'
     }
 }, {
     id: 'letter',
@@ -10353,6 +10352,14 @@ var jsonForms = exports.jsonForms = [
             flags: 'i',
             message: 'Invalid email'
         }]
+    }
+}, {
+    id: 'agree',
+    type: 'switch-field',
+    props: {
+        label: 'Согласие с правилами',
+        isChecked: false
+        // добавить валидацию!
     }
 }];
 
@@ -11092,7 +11099,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"main.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"main.vue","sourceRoot":""}]);
 
 // exports
 
@@ -11122,6 +11129,7 @@ var render = function() {
       _c("datepicker", {
         attrs: {
           "input-class": "form-control",
+          name: _vm.id,
           placeholder: _vm.placeholder,
           disabled: _vm.state.disabled
         },
@@ -11242,7 +11250,7 @@ exports = module.exports = __webpack_require__(0)(true);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"main.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"main.vue","sourceRoot":""}]);
 
 // exports
 
@@ -11252,6 +11260,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask_core__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inputmask_core__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ff_polyfill__ = __webpack_require__(45);
@@ -11262,7 +11271,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 Object(__WEBPACK_IMPORTED_MODULE_1__ff_polyfill__["a" /* default */])();
 
-/* harmony default export */ __webpack_exports__["a"] = ({
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MaskedInput',
   render: function render(h) {
     return h('input', {
@@ -12182,13 +12191,13 @@ var render = function() {
       _vm._v(" "),
       _c("masked-input", {
         staticClass: "form-control",
-        attrs: { placeholder: _vm.placeholder, mask: "\\+\\7(111)111-11-11" },
+        attrs: { name: _vm.id, placeholder: _vm.placeholder, mask: _vm.mask },
         model: {
-          value: _vm.dataPhone,
+          value: _vm.phone,
           callback: function($$v) {
-            _vm.dataPhone = $$v
+            _vm.phone = $$v
           },
-          expression: "dataPhone"
+          expression: "phone"
         }
       })
     ],

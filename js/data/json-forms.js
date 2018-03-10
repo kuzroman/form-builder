@@ -65,7 +65,6 @@ export let jsonForms = [
         }
     },
 
-
     {
         id: 'gender',
         type: 'radio-field',
@@ -94,7 +93,7 @@ export let jsonForms = [
         type: 'date-field',
         props: {
             label: 'Предустановленная дата',
-            value: '2018-03-08'//new Date()
+            value: '2018-03-08'
         }
     },
     {
@@ -103,7 +102,8 @@ export let jsonForms = [
         props: {
             label: 'Номер мобильного с маской',
             placeholder: 'No time to explain just give me phone',
-            // phone: '9263249060'
+            mask: '\\+\\7(111)111-11-11'
+            // initialValue: '9263249060'
         }
     },
 
@@ -136,6 +136,23 @@ export let jsonForms = [
             }]
         },
     },
+
+    {
+        id: 'agree',
+        type: 'switch-field',
+        props: {
+            label: 'Согласие с правилами',
+            isChecked: false,
+            // добавить валидацию!
+        }
+    },
+    // {
+    //     id: 'sms-code',
+    //     type: 'text-input',
+    //     props: {
+    //         label: 'СМС-проверка'
+    //     }
+    // }
 
 
     // {
