@@ -4,7 +4,8 @@ input text - с валидацией
 
 input phone - с маской
 
-input date - на основе datepiker
+input date - на основе datepiker, 
+реализовал диапазоны для disable min max
 
 radio - нейтив
 
