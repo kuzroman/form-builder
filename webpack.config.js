@@ -9,8 +9,6 @@ let PROD = 0;//JSON.parse(process.env.PROD_ENV || '0');
 let pathTo = {
     dist: path.resolve(__dirname, 'dist'),
     js: path.resolve(__dirname, 'js/main.js'),
-    // js: path.resolve(__dirname, 'js/main-2.js'),
-    // js: path.resolve(__dirname, 'js/vuex.js'),
     css: path.resolve(__dirname, 'styles/main.sass'),
 };
 
