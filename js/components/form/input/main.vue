@@ -8,20 +8,22 @@
             >
             <div v-if="errorMessage">{{ errorMessage }}</div>
         </label>
-        <!--<p>check bind: {{ value }}</p>-->
     </div>
 </template>
 
 <script>
+    import hp from 'Js/helper'
+
     export default {
         name: 'input-field',
         props: {
-            id: {type: String},
-            label: {type: String},
-            placeholder: {type: String},
-            initialValue: {type: String},
-            validation: {type: Array},
-            depends: Object || false,
+            stepId: Number,
+            id: String,
+            label: String,
+            placeholder: String,
+            initialValue: String,
+            validation: Array,
+            depends: Object,
         },
         data: function () {
             return {
@@ -31,31 +33,15 @@
             }
         },
         computed: {
-            isVisible() {
-                if (!this.depends) {
-                    return true;
-                }
-
-                let when = this.depends.when;
-                let isDisable = when.length;
-                let model = this.$store.state.model;
-
-                for (let i in when) {
-                    let props = when[i].props;
-                    for (let key in props) {
-                        if (model[when[i].id].props[key] === props[key]) {
-                            isDisable--;
-                        }
-                    }
-                }
-
-                return !isDisable;
-            },
+            isVisible: function () {
+                return hp.isElementInFormVisible(this.depends, this.$store, this.stepId);
+            }
         },
         methods: {
             inputValue(ev) {
                 this.validate();
-                this.$store.commit('setParam', {id: this.id, key: 'value', val: ev.target.value});
+                // todo менять при смене схемы!
+                this.$store.commit('setParamInForm', {stepId: this.stepId, id: this.id, key: 'value', val: ev.target.value});
             },
             validate() {
                 if (!this.validation) return;

@@ -1,0 +1,25 @@
+.steps
+  display: flex
+  margin: 50px 0
+
+  &__num
+    padding: 8px
+    background: $color-lemon
+    text-align: center
+    border: 1px solid darken($color-lemon, 5%)
+    cursor: pointer
+    margin-left: 25px
+
+    &:first-child
+      margin-left: 0
+
+    &:hover
+      background: $color-black
+      border: 1px solid darken($color-black, 5%)
+      color: $color-white
+
+    &.disable
+      background: $color-gray
+      border: 1px solid darken($color-gray, 5%)
+      cursor: auto
+      color: inherit

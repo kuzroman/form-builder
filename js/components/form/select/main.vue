@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name: 'input-field',
+        name: 'select-field',
         props: {
             id: {type: String},
             label: {type: String},

@@ -1,158 +1,135 @@
-export let jsonForms = [
-    // !Добавить группу, что она должна делать?
-    {
-        id: 'first-name',
-        type: 'input-field',
-        props: {
-            label: 'Имя',
-            placeholder: 'Имя',
-            initialValue: '',
-
-            validation: [
-                {
-                    type: 'regexp',
-                    expression: '^[а-яё-]+$',
-                    flags: 'i',
-                    message: 'Только кириллица и дефис'
-                }
-            ]
-        },
-    },
-    {
-        id: 'patronymic',
-        type: 'input-field',
-        props: {
-            label: 'Отчество',
-            placeholder: 'Отчество',
-            initialValue: 'Initial Name',
-
-            validation: [
-                {
-                    type: 'regexp',
-                    expression: '^[а-яё-]+$',
-                    flags: 'i',
-                    message: 'Только кириллица и дефис'
-                }
-            ],
-
-            depends: {
-                type: 'isVisible',
-                when: [
-                    {
-                        id: 'no-patronymic',
-                        props: {
-                            isChecked: false
+export default {
+    steps: {
+        1: {
+            id: 1,
+            active: true,
+            children: {
+                'first-name': {
+                    id: 'first-name',
+                    type: 'form-input',
+                    label: 'Имя',
+                    placeholder: 'Имя',
+                    initialValue: '',
+                    validation: [
+                        {
+                            type: 'regexp',
+                            expression: '^[а-яё-]+$',
+                            flags: 'i',
+                            message: 'Только кириллица и дефис'
                         }
+                    ]
+                },
+
+                'patronymic': {
+                    id: 'patronymic',
+                    type: 'form-input',
+                    label: 'Отчество',
+                    placeholder: 'Отчество',
+                    initialValue: 'Initial Name',
+                    validation: [{
+                        type: 'regexp',
+                        expression: '^[а-яё-]+$',
+                        flags: 'i',
+                        message: 'Только кириллица и дефис'
+                    }],
+                    depends: {
+                        type: 'isVisible',
+                        when: [{
+                            id: 'no-patronymic',
+                            props: {
+                                isChecked: false
+                            }
+                        }]
                     }
-                ]
+                },
+
+                'no-patronymic': {
+                    id: 'no-patronymic',
+                    type: 'form-switch',
+                    label: 'Без батьки рос',
+                    isChecked: false,
+
+                },
+
+                'gender': {
+                    id: 'gender',
+                    type: 'form-radio',
+                    label: 'Пол',
+                    items: [
+                        {text: 'M', value: 0},
+                        {text: 'Ж', value: 1}
+                    ]
+                },
+
+                'birthdate': {
+                    id: 'birthdate',
+                    type: 'form-date',
+                    label: 'Дата рождения',
+                    placeholder: 'до 2018-03-05, после 2018-03-25',
+                    min: '2018-03-05',
+                    max: '2018-03-25',
+                },
+                'date': {
+                    id: 'date',
+                    type: 'form-date',
+                    label: 'Предустановленная дата',
+                    value: '2018-03-08'
+                },
+                'phone': {
+                    id: 'phone',
+                    type: 'form-phone',
+                    label: 'Номер мобильного с маской',
+                    placeholder: 'No time to explain just give me phone',
+                    mask: '\\+\\7(111)111-11-11'
+                    // initialValue: '9263249060'
+                },
+
+                'letter': {
+                    id: 'letter',
+                    type: 'form-select',
+                    label: 'Choose a letter',
+                    selected: 'Б',
+                    options: [
+                        {text: 'Один', value: 'А'},
+                        {text: 'Два', value: 'Б'},
+                        {text: 'Три', value: 'В'}
+                    ]
+                },
+                'email': {
+                    id: 'email',
+                    type: 'form-input',
+                    label: 'Email with validation',
+                    placeholder: 'mail@example.com',
+                    validation: [{
+                        type: 'regexp',
+                        expression: '^[a-z0-9\.]+@[a-z0-9\.]+$',
+                        flags: 'i',
+                        message: 'Invalid email'
+                    }]
+                },
+
+                'agree': {
+                    id: 'agree',
+                    type: 'form-switch',
+                    label: 'Согласие с правилами',
+                    isChecked: false,
+                    // добавить валидацию!
+                }
             }
         },
-        validation: [
-            {
-                type: 'regexp',
-                expression: '^[a-z ]+$',
-                flags: 'i',
-                message: 'Invalid name'
+        2: {
+            id: 2,
+            active: false,
+            children: {
+                'sms-code': {
+                    id: 'sms-code',
+                    type: 'form-input',
+                    label: 'СМС-проверка'
+                }
             }
-        ]
-    },
-    {
-        id: 'no-patronymic',
-        type: 'switch-field',
-        props: {
-            label: 'Без батьки рос',
-            isChecked: false,
         }
-    },
-
-    {
-        id: 'gender',
-        type: 'radio-field',
-        props: {
-            label: 'Пол',
-
-            items: [
-                {text: 'M', value: 0},
-                {text: 'Ж', value: 1}
-            ]
-        },
-    },
-
-    {
-        id: 'birthdate',
-        type: 'date-field',
-        props: {
-            label: 'Дата рождения',
-            placeholder: 'до 2018-03-05, после 2018-03-25',
-            min: '2018-03-05',
-            max: '2018-03-25',
-        }
-    },
-    {
-        id: 'date',
-        type: 'date-field',
-        props: {
-            label: 'Предустановленная дата',
-            value: '2018-03-08'
-        }
-    },
-    {
-        id: 'phone',
-        type: 'phone-field',
-        props: {
-            label: 'Номер мобильного с маской',
-            placeholder: 'No time to explain just give me phone',
-            mask: '\\+\\7(111)111-11-11'
-            // initialValue: '9263249060'
-        }
-    },
-
-    {
-        id: 'letter',
-        type: 'select-field',
-        props: {
-            label: 'Choose a letter',
-            selected: 'Б',
-            options: [
-                {text: 'Один', value: 'А'},
-                {text: 'Два', value: 'Б'},
-                {text: 'Три', value: 'В'}
-            ]
-        }
-    },
-    {
-        id: 'email',
-        type: 'input-field',
-        props: {
-            label: 'Email with validation',
-            placeholder: 'mail@example.com',
-            errors: [],
-
-            validation: [{
-                type: 'regexp',
-                expression: '^[a-z0-9\.]+@[a-z0-9\.]+$',
-                flags: 'i',
-                message: 'Invalid email'
-            }]
-        },
-    },
-
-    {
-        id: 'agree',
-        type: 'switch-field',
-        props: {
-            label: 'Согласие с правилами',
-            isChecked: false,
-            // добавить валидацию!
-        }
-    },
-    // {
-    //     id: 'sms-code',
-    //     type: 'text-input',
-    //     props: {
-    //         label: 'СМС-проверка'
-    //     }
-    // }
+    }
+};
 
 
     // {
@@ -176,4 +153,3 @@ export let jsonForms = [
     //         ],
     //     }
     // },
-];

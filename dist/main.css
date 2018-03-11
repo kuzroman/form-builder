@@ -10,4 +10,26 @@
   .l-content__el {
     margin: 20px 0; }
 
+.steps {
+  display: flex;
+  margin: 50px 0; }
+  .steps__num {
+    padding: 8px;
+    background: #ffed00;
+    text-align: center;
+    border: 1px solid #e6d500;
+    cursor: pointer;
+    margin-left: 25px; }
+    .steps__num:first-child {
+      margin-left: 0; }
+    .steps__num:hover {
+      background: #000;
+      border: 1px solid black;
+      color: #fff; }
+    .steps__num.disable {
+      background: #d2d2d2;
+      border: 1px solid #c5c5c5;
+      cursor: auto;
+      color: inherit; }
+
 /*# sourceMappingURL=main.css.map*/

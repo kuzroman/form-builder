@@ -17,15 +17,16 @@
 
 <script>
     export default {
-        name: 'input-field',
+        name: 'radio-field',
         props: {
+            stepId: Number,
             id: {type: String},
             label: {type: String},
             items: Array
         },
         methods: {
             changeValue(ev) {
-                this.$store.commit('setParam', {id: this.id, key: 'value', val: ev.target.value});
+                this.$store.commit('setParamInForm', {stepId: this.stepId, id: this.id, key: 'value', val: ev.target.value});
             },
         }
     }

@@ -2,37 +2,34 @@
     <div class="material-switch pull-right l-content__el">
         <div>{{ label }}</div>
         <input :id="id" :name="id" type="checkbox"
-               :checked="isChecked"
+               :checked="dataIsChecked"
                @change="changeSwitch"
         />
         <label :for="id" class="label-default"></label>
-        <p>{{ isChecked ? 'да' : 'нет' }}</p>
+        <p>{{ dataIsChecked ? 'да' : 'нет' }}</p>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'input-field',
+        name: 'switch-field',
         props: {
-            id: {type: String},
-            label: {type: String},
+            stepId: Number,
+            id: String,
+            label: String,
+            isChecked: Boolean
         },
-        computed: {
-            isChecked () { // todo можно короче! модель теперь обьект
-                let model = this.$store.state.model;
-                for (let i in model) {
-                    if (model[i].id === this.id) {
-                        return model[i].props.isChecked;
-                    }
-                }
-            },
+        data: function () {
+            return {
+                dataIsChecked: this.isChecked
+            }
         },
         methods: {
             changeSwitch(ev) {
-                this.$store.commit('setParam', {id: this.id, key: 'isChecked', val: ev.target.checked});
-//                console.log('change switch', ev.target.checked);
+                this.dataIsChecked = ev.target.checked;
+                this.$store.commit('setParamInForm', {stepId: this.stepId, id: this.id, key: 'isChecked', val: this.dataIsChecked});
             }
-        },
+        }
     }
 </script>
 

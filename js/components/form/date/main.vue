@@ -8,7 +8,6 @@
                 :disabled="state.disabled"
                 v-model="dataValue">
         </datepicker>
-        <!--<p>check bind: {{ dataValue }}</p>-->
     </div>
 </template>
 
