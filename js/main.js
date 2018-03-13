@@ -1,35 +1,12 @@
-import Vue from 'vue'
-let model = require('Data/json-forms').default;
-let store = require('Js/store').default;
-// import hp from 'Js/helper'
-// import VueRouter from 'vue-router'
-// Vue.use(VueRouter);
-// let bus = new Vue();
+import App from './App';
 
-new Vue({
-    el: '#form-builder',
-    store: store.getStore(model),
-    render: function (createElement) {
-        let list = this.createElementBuilder(createElement);
-        return createElement('div', {}, list);
-    },
-    components: {
-        'form-builder': require('Components/form/builder/main.vue').default,
-        'blocks-steps': require('Components/blocks/steps/main.vue').default,
-    },
-    methods: {
-        createElementBuilder(createElement) {
-            let list = [];
-            let steps = model.steps;
+const attributeName = 'data-form';
+const formNodes = document.querySelectorAll('[' + attributeName + ']');
 
-            for (let key in steps) {
-                list.push(createElement('form-builder', {props: steps[key]}));
-            }
-
-            list.push(createElement('blocks-steps', {props: {
-                steps: model.steps
-            }}));
-            return list;
-        }
-    }
-});
+const appInstances = [];
+for (let k = 0; k < formNodes.length; k++) {
+    const mount = formNodes[k];
+    const endpoint = mount.getAttribute(attributeName);
+    const app = new App(mount, endpoint);
+    appInstances.push(app);
+}

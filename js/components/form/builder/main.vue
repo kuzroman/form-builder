@@ -1,49 +1,3 @@
-<template>
-    <div>
-        <template v-if="active" v-for="item in model">
-            <form-input v-if="item.type === 'form-input'" :key="item.id" :stepId="item.stepId"
-                         :id="item.id"
-                         :label="item.label"
-                         :placeholder="item.placeholder"
-                         :initialValue="item.initialValue"
-                         :validation="item.validation"
-                         :depends="item.depends"
-            ></form-input>
-            <form-switch v-if="item.type === 'form-switch'" :key="item.id" :stepId="item.stepId"
-                          :id="item.id"
-                          :label="item.label"
-                          :isChecked="item.isChecked"
-            ></form-switch>
-            <form-radio v-if="item.type === 'form-radio'" :key="item.id" :stepId="item.stepId"
-                         :id="item.id"
-                         :label="item.label"
-                         :items="item.items"
-            ></form-radio>
-            <form-select v-if="item.type === 'form-select'" :key="item.id" :stepId="item.stepId"
-                          :id="item.id"
-                          :label="item.label"
-                          :selected="item.selected"
-                          :options="item.options"
-            ></form-select>
-            <form-date v-if="item.type === 'form-date'" :key="item.id" :stepId="item.stepId"
-                        :id="item.id"
-                        :label="item.label"
-                        :placeholder="item.placeholder"
-                        :value="item.value"
-                        :min="item.min"
-                        :max="item.max"
-            ></form-date>
-            <form-phone v-if="item.type === 'form-phone'" :key="item.id" :stepId="item.stepId"
-                         :id="item.id"
-                         :label="item.label"
-                         :placeholder="item.placeholder"
-                         :initialValue="item.initialValue"
-                         :mask="item.mask"
-            ></form-phone>
-        </template>
-    </div>
-</template>
-
 <script>
     export default {
         name: 'form-builder',
@@ -53,8 +7,10 @@
             children: Object
         },
         render: function (createElement) {
-            let list = this.createElementBuilder(createElement);
-            return createElement('div', {}, list);
+            if (this.active) {
+                let list = this.createElementBuilder(createElement);
+                return createElement('div', {}, list);
+            }
         },
         components: {
             // 'sum': require('Components/form/sum/main.vue').default,
